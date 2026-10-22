@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "author": "Baria Shafiq",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": -4.76, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": -42, "left": 215, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -3.6,
+      "left": 301.4,
+      "attrs": { "color": "yellow" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 51.95,
+      "left": 134.4,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 138.35,
+      "left": 220.8,
+      "attrs": { "value": "1000" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:19", "r1:1", "green", [ "h0" ] ],
+    [ "esp:GND.2", "led1:C", "black", [ "v0" ] ],
+    [ "led1:A", "r1:2", "green", [ "v0" ] ],
+    [ "esp:GND.2", "led2:C", "black", [ "v9.6", "h177.64", "v28.8" ] ],
+    [ "r2:2", "led2:A", "green", [ "v-57.6", "h18" ] ],
+    [ "r2:1", "esp:18", "green", [ "v0" ] ]
+    
+  ],
+  "dependencies": {}
+}
