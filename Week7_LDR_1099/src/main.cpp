@@ -1,0 +1,47 @@
+//Baria_1099
+#include <Arduino.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define LDR_PIN 4
+#define SDA_PIN 21
+#define SCL_PIN 22
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin(SDA_PIN, SCL_PIN);
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  display.clearDisplay();
+  display.setTextColor(SSD1306_WHITE);
+}
+
+void loop() {
+  int adcValue = analogRead(LDR_PIN);
+  float voltage = (adcValue / 4095.0) * 3.3;
+
+  display.clearDisplay();
+   // Peela hissa: title
+  display.setTextSize(2);
+  display.setCursor(0, 0);
+  display.print("LDR Sensor");
+
+  // Neela hissa: ADC value
+  display.setCursor(0, 22);
+  display.print("ADC:");
+  display.print(adcValue);
+
+  // Neela hissa: voltage
+  display.setCursor(0, 44);
+  display.print("V:");
+  display.print(voltage, 2);
+  display.print("V");
+  display.display();
+
+  Serial.printf("ADC: %d  |  Voltage: %.2f V\n", adcValue, voltage);
+  delay(1000);
+}
