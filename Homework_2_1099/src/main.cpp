@@ -56,7 +56,7 @@ void updateOLED()
     display.println("Hz");
 
     // LED 2: bilkul wahi
-    display.setCursor(1, 40);
+    display.setCursor(18, 40);
     display.print("LED2: ");
     display.print(duty_2 * 100 / PWM_MAX_DUTY);
     display.print("% F:");
